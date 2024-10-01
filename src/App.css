@@ -8,15 +8,20 @@
   .note-header {
 	display: flex;
 	align-items: center;
-	justify-content: space-evenly;
+	justify-content: space-between; /* تغییر برای فاصله بیشتر */
 	margin-bottom: 3rem;
 	border-bottom: 1px solid var(--text-400);
+	background-color: var(--bg-color); /* افزودن پس‌زمینه */
   }
   
   .note-app {
 	display: flex;
 	justify-content: space-between;
 	gap: 2rem;
+	background-color: var(--bg-color); /* افزودن پس‌زمینه */
+	border-radius: 0.5rem; /* گوشه‌های گرد */
+	padding: 2rem; /* فضای داخلی */
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* سایه */
   }
   
   .note-form {
@@ -46,7 +51,8 @@
 	font-size: 0.75rem;
 	color: var(--text-100);
   }
-  .note-status ul{
+  
+  .note-status ul {
 	display: flex;
 	justify-content: space-between;
   }
@@ -56,6 +62,12 @@
 	background-color: #fff;
 	border-radius: 0.75rem;
 	margin-bottom: 1.5rem;
+	box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1); /* سایه */
+	transition: transform 0.2s; /* انیمیشن */
+  }
+  
+  .note-item:hover {
+	transform: translateY(-2px); /* انیمیشن هنگام هاور */
   }
   
   .note-item__header {
@@ -94,21 +106,13 @@
 	align-items: center;
   }
   
-  .note-item__header .trash {
-	width: 1.5rem;
-	height: 1.5rem;
-	color: var(--rose-500);
-	background: none;
-  }
-  
   .note-item__footer {
 	display: flex;
 	justify-content: space-between;
 	color: var(--text-300);
   }
+  
   .deadline-passed {
 	color: rgb(238, 103, 103);
-	/* text-decoration: line-through; اضافه کردن خط روی متن */
   }
-  
   

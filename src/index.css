@@ -1,11 +1,13 @@
+/* index.css */
+
 :root {
-	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+	--font-family: 'Inter', sans-serif;
 	--bg-color: #f3f4f6;
 	--text-700: #374151;
 	--text-400: #94a3b8;
 	--text-100: #f3f4f6;
 	--text-300: #cbd5e1;
-	--white: #fff;
+	--white: #ffffff;
 	--primary-700: #4338ca;
 	--primary-600: #4f46e5;
 	--primary-100: #e0e7ff;
@@ -23,35 +25,8 @@
 	background-color: var(--bg-color);
 	width: 100vw;
 	min-height: 100vh;
-  }
-  
-  input {
-	display: block;
-	outline: none;
-	border: none;
-  }
-  
-  button {
-	outline: none;
-	border: none;
-	cursor: pointer;
-  }
-  p {
-	text-align: left;
-  }
-  
-  h1 {
-	margin-bottom: 1.5rem;
+	font-family: var(--font-family);
 	color: var(--text-700);
-  }
-  
-  h2 {
-	margin-bottom: 1.5rem;
-	color: var(--text-700);
-  }
-  
-  input[type="checkbox"] {
-	transform: scale(1.5);
   }
   
   button {
@@ -61,6 +36,21 @@
 	background: none;
   }
   
+  input {
+	display: block;
+	outline: none;
+	border: none;
+  }
+  
+  p {
+	text-align: left;
+  }
+  
+  h1, h2 {
+	margin-bottom: 1.5rem;
+	color: var(--text-700);
+  }
+  
   select {
 	padding: 0.5rem 1rem;
 	outline: none;
@@ -68,23 +58,112 @@
 	border-radius: 0.75rem;
 	font-weight: 700;
 	color: var(--text-700);
+	background-color: var(--white);
+	transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  
+  select:focus {
+	border-color: var(--primary-600);
+	box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+  }
+  
+  .btn {
+	border-radius: 0.5rem;
+	padding: 0.75rem 1rem;
+  }
+  
+  .btn--primary {
+	background: linear-gradient(135deg, var(--primary-600) 0%, var(--primary-700) 100%);
+	color: white;
+	font-size: 1rem;
+	padding: 0.75rem 1rem;
+	border-radius: 0.5rem;
+	transition: background 0.3s, transform 0.2s;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .btn--primary:hover {
+	background: linear-gradient(135deg, var(--primary-700) 0%, var(--primary-600) 100%);
+	transform: translateY(-2px);
+	box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
   }
   
   .text-field {
 	width: 100%;
-	padding: 1rem;
+	padding: 0.75rem 1rem;
+	border: 1px solid var(--text-400);
 	border-radius: 0.5rem;
 	color: var(--text-700);
 	font-size: 1rem;
+	transition: border-color 0.3s, box-shadow 0.3s;
   }
-  .btn {
-	border-radius: 0.5rem;
-	padding: 1rem 1rem;
+  
+  .text-field:focus {
+	border-color: var(--primary-600);
+	box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+  }
+
+  :root {
+	--bg-color: #f3f4f6; /* رنگ پس‌زمینه اصلی */
+	--card-bg: #ffffff; /* رنگ پس‌زمینه کارت‌ها */
+	--card-shadow: rgba(0, 0, 0, 0.1); /* سایه کارت‌ها */
+	--primary-color: #007bff; /* رنگ اصلی دکمه‌ها */
+  }
+  
+  body {
+	background: var(--bg-color);
+	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+	color: #333; /* رنگ متن */
+	margin: 0; /* حذف حاشیه پیش‌فرض */
+	padding: 0; /* حذف padding پیش‌فرض */
+  }
+  
+  .container {
+	max-width: 1280px;
+	margin: 0 auto; /* مرکز کردن اپلیکیشن */
+	padding: 2rem;
+	background-color: var(--bg-color);
+	border-radius: 10px; /* گرد کردن گوشه‌ها */
+	box-shadow: 0 4px 20px var(--card-shadow); /* سایه برای کل کانتینر */
+  }
+  body {
+	background-color: #f3f4f6; /* رنگ زمینه */
+	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif; 
+	color: #1f2937; /* رنگ متن تیره */
+	padding: 2rem; /* فاصله داخلی */
+  }
+  
+  .container {
+	background-color: #fff; /* رنگ پس‌زمینه کانتینر */
+	margin: 0 auto; /* مرکز چینش */
+	padding: 2rem; /* فضای داخلی */
+	border-radius: 0.5rem; /* گوشه‌های گرد */
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* سایه */
+  }
+  
+  .note-item {
+	background-color: var(--card-bg); /* پس‌زمینه سفید برای کارت‌ها */
+	border-radius: 10px; /* گرد کردن گوشه‌های کارت */
+	padding: 1rem;
+	margin-bottom: 1.5rem;
+	box-shadow: 0 2px 8px var(--card-shadow); /* سایه کارت‌ها */
+	transition: transform 0.2s; /* انیمیشن برای افکت hover */
+  }
+  
+  .note-item:hover {
+	transform: translateY(-5px); /* افکت hover */
   }
   
   .btn--primary {
-	background-color: var(--primary-600);
-	color: white;
-	font-size: 1rem;
+	background-color: var(--primary-color); /* رنگ دکمه اصلی */
+	color: white; /* رنگ متن دکمه */
+	padding: 1rem 1.5rem; /* padding بیشتر برای دکمه */
+	border-radius: 5px; /* گرد کردن گوشه‌های دکمه */
+	transition: background-color 0.3s; /* انیمیشن برای تغییر رنگ */
   }
+  
+  .btn--primary:hover {
+	background-color: darken(var(--primary-color), 10%); /* تیرگی رنگ دکمه در حالت hover */
+  }
+  
   

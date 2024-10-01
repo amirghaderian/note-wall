@@ -1,0 +1,32 @@
+.note-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 20px;
+	background-color: #f0f4f8; /* رنگ پس‌زمینه ملایم */
+	border-radius: 8px;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* سایه نرم */
+  }
+  
+  .note-header h1 {
+	font-size: 24px;
+	color: #333;
+  }
+  
+  .note-sort-select {
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	background-color: #fff; /* پس‌زمینه سفید */
+	transition: border-color 0.3s;
+  }
+  
+  .note-sort-select:focus {
+	border-color: #007bff; /* رنگ مرز در حالت فوکوس */
+	outline: none; /* حذف حاشیه پیش‌فرض */
+  }
+  
+  .note-sort-select option {
+	padding: 10px; /* فاصله داخلی گزینه‌ها */
+  }
+  

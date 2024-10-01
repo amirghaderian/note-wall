@@ -1,13 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
-import { NewNote,NoteList,Header,NoteStatus } from "./Components";
-
-// تعریف نوع برای یادداشت
-interface Note {
-  id: number; // یا string، بسته به اینکه ID به چه صورت تعریف شده
-  content: string;
-  completed: boolean;
-}
+import { NewNote, NoteList, Header, NoteStatus } from "./Components";
+import Note from "./types/types";
 
 const App: React.FC = () => {
   const [notes, setNotes] = useState<Note[]>([]);
@@ -29,31 +23,29 @@ const App: React.FC = () => {
     setNotes(newNotes);
   };
 
-  let sortedNotes = notes;
+  let sortedNotes = notes; // این قسمت در آینده باید برای مرتب‌سازی یادداشت‌ها اضافه شود.
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSortBy(e.target.value);
-    setNotes(sortedNotes);
+    // این قسمت نیاز به به‌روزرسانی دارد، در حال حاضر به سادگی از sortedNotes استفاده شده است
   };
 
   return (
-    <>
-      <div className="container">
-        <Header notes={notes} sortBy={sortBy} onSort={handleChange} />
-        <div className="note-app">
-          <NewNote onAddNote={handleNotes} />
-          <div className="note-container">
-            <NoteStatus notes={notes} />
-            <NoteList
-              notes={sortedNotes}
-              sortBy={sortBy}
-              sortedNotes={sortedNotes}
-              onDelete={handleDelete}
-              onComplete={handleCompletedNote}
-            />
-          </div>
+    <div className="container">
+      <Header notes={notes} sortBy={sortBy} onSort={handleChange} />
+      <div className="note-app">
+        <NewNote onAddNote={handleNotes} />
+        <div className="note-container">
+          <NoteStatus notes={notes} />
+          <NoteList
+            notes={sortedNotes}
+            sortBy={sortBy}
+            sortedNotes={sortedNotes}
+            onDelete={handleDelete}
+            onComplete={handleCompletedNote}
+          />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

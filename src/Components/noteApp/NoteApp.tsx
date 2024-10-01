@@ -6,10 +6,10 @@ interface NoteAppProps {
   onAddNote: (note: Note) => void;
   onDelete: (id: number) => void;
   onComplete: (id: number) => void;
-  onUpdate: (note: Note) => void
+  onUpdate: (note: Note) => void;
+  onSort: (notes: Note[]) => void;
   notes: Note[];
   sortBy: string;
-  sortedNotes: Note[];
 }
 
 const NoteApp: React.FC<NoteAppProps> = ({
@@ -17,15 +17,19 @@ const NoteApp: React.FC<NoteAppProps> = ({
   onDelete,
   onComplete,
   onUpdate,
+  onSort,
   notes,
   sortBy,
-  sortedNotes,
 }) => {
   const [title, setTitle] = useState<string>(""); // برای افزودن یادداشت
   const [description, setDescription] = useState<string>(""); // برای افزودن یادداشت
   const [editTitle, setEditTitle] = useState<string>(""); // برای ویرایش یادداشت
   const [editDescription, setEditDescription] = useState<string>(""); // برای ویرایش یادداشت
+  const [deadline, setDeadline] = useState<string>(""); // اضافه کردن ددلاین
+  const [editingDeadLine, setEditDeadline] =  useState<string>(""); // برای مدیریت یادداشت در حال ویرایش
   const [editingNoteId, setEditingNoteId] = useState<number | null>(null); // برای مدیریت یادداشت در حال ویرایش
+
+  const [draggingIndex, setDraggingIndex] = useState<number | null>(null); // ایندکس یادداشتی که در حال کشیدن است
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -34,43 +38,53 @@ const NoteApp: React.FC<NoteAppProps> = ({
     const newNote: Note = {
       title,
       description,
-      id: editingNoteId !== null ? editingNoteId : Date.now(), // اگر در حال ویرایش هستید، از id فعلی استفاده کنید
+      id: editingNoteId !== null ? editingNoteId : Date.now(),
       completed: false,
       createdAt: new Date().toISOString(),
+	  deadline
     };
 
     setTitle("");
     setDescription("");
     onAddNote(newNote);
-    setEditingNoteId(null); // بازنشانی id ویرایش
-    setEditTitle(""); // بازنشانی عنوان ویرایش
-    setEditDescription(""); // بازنشانی توضیحات ویرایش
+    setEditingNoteId(null);
+    setEditTitle("");
+    setEditDescription("");
   };
 
   const handleEditClick = (note: Note) => {
-    setEditTitle(note.title); // مقدار عنوان ویرایش را تنظیم می‌کند
-    setEditDescription(note.description); // مقدار توضیحات ویرایش را تنظیم می‌کند
-    setEditingNoteId(note.id); // ذخیره id یادداشت در حال ویرایش
+    setEditTitle(note.title);
+    setEditDescription(note.description);
+	setEditDeadline(note.deadline ? note.deadline : "")
+    setEditingNoteId(note.id);
   };
 
   const handleUpdateNote = () => {
-	debugger;
-	console.log(editingNoteId);
-    if (!editTitle || !editDescription || editingNoteId === null) return;
-    const updatedNote: Note = {
-      title: editTitle,
-      description: editDescription,
-      id: editingNoteId,
-      completed: false,
-      createdAt: new Date().toISOString(),
-    };
-	onUpdate(updatedNote)
-
-    // onAddNote(); // به روز رسانی یادداشت
-    setEditingNoteId(null); // بازنشانی id ویرایش
-    setEditTitle(""); // بازنشانی عنوان ویرایش
-    setEditDescription(""); // بازنشانی توضیحات ویرایش
+	if (!editTitle || !editDescription || editingNoteId === null) return;
+  
+	// پیدا کردن یادداشت مورد نظر برای حفظ وضعیت completed
+	const noteToUpdate = notes.find((note) => note.id === editingNoteId);
+  
+	if (!noteToUpdate) return;
+  
+	const updatedNote: Note = {
+	  title: editTitle,
+	  description: editDescription,
+	  id: editingNoteId,
+	  completed: noteToUpdate.completed, // حفظ وضعیت completed
+	  createdAt: noteToUpdate.createdAt,  // حفظ تاریخ ایجاد اصلی
+	  deadline: editingDeadLine || "",  // استفاده از editingDeadLine
+	};
+  
+	onUpdate(updatedNote);
+  
+	// پاک کردن مقادیر بعد از ویرایش
+	setEditTitle("");
+	setEditDescription("");
+	setEditDeadline("");
+	setEditingNoteId(null);
   };
+  
 
   // حساب وضعیت یادداشت‌ها
   const allNotes = notes.length;
@@ -78,20 +92,40 @@ const NoteApp: React.FC<NoteAppProps> = ({
   const openNotes = allNotes - completedNotes;
 
   // مرتب‌سازی یادداشت‌ها
-  if (sortBy === "earliest") {
-    sortedNotes = [...notes].sort(
-      (a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
-    );
-  } else if (sortBy === "latest") {
-    sortedNotes = [...notes].sort(
-      (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-    );
-  } else {
-    sortedNotes = [...notes].sort(
-      (a, b) => Number(a.completed) - Number(b.completed)
-    );
-  }
+  const sortedNotes = [...notes].sort((a, b) => {
+    if (sortBy === "earliest") {
+      return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
+    } else if (sortBy === "latest") {
+      return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+    } else {
+      return Number(a.completed) - Number(b.completed);
+    }
+  });
 
+  // جابجایی یادداشت
+  const handleDragStart = (index: number) => {
+    setDraggingIndex(index);
+  };
+
+  const handleDragOver = (index: number) => {
+    if (draggingIndex === null || index === draggingIndex) return;
+    
+    const reorderedNotes = [...sortedNotes];
+    const noteToMove = reorderedNotes.splice(draggingIndex, 1)[0];
+    reorderedNotes.splice(index, 0, noteToMove);
+    setDraggingIndex(index); // آپدیت ایندکس جابجایی
+    onSort(reorderedNotes); // بروز رسانی ترتیب
+  };
+
+  const handleDragEnd = () => {
+    setDraggingIndex(null); // پایان جابجایی
+  };
+  const isDeadlinePassed = (deadline: string) => {
+	const deadlineDate = new Date(deadline);
+	const currentDate = new Date();
+	return deadlineDate < currentDate;
+  };
+  
   return (
     <div className="note-app">
       {/* بخش افزودن یادداشت */}
@@ -112,6 +146,12 @@ const NoteApp: React.FC<NoteAppProps> = ({
             className="text-field"
             placeholder="Note description ..."
           />
+		    <input
+   			value={deadline}
+			onChange={(e) => setDeadline(e.target.value)}
+			type="date" // نوع ورودی به "date" تغییر می‌کند تا تاریخ ددلاین انتخاب شود
+    		className="text-field"
+  />
           <button type="submit" className="btn btn--primary">
             Add New Note
           </button>
@@ -139,11 +179,18 @@ const NoteApp: React.FC<NoteAppProps> = ({
 
         {/* بخش لیست یادداشت‌ها */}
         <div className="note-list">
-          {sortedNotes.map((note) => (
-            <div key={note.id} className={`note-item ${note.completed && "completed"}`}>
+          {sortedNotes.map((note, index) => (
+            <div
+              key={note.id}
+              draggable
+              onDragStart={() => handleDragStart(index)}
+              onDragOver={() => handleDragOver(index)}
+              onDragEnd={handleDragEnd}
+              className={`note-item ${note.completed ? "completed" : ""}`}
+            >
               <div className="note-item__header">
                 <div>
-                  {editingNoteId === note.id ? ( // اگر در حال ویرایش است، ورودی‌ها را نمایش می‌دهیم
+                  {editingNoteId === note.id ? (
                     <>
                       <input
                         value={editTitle}
@@ -157,16 +204,23 @@ const NoteApp: React.FC<NoteAppProps> = ({
                         type="text"
                         className="text-field"
                       />
+					    <input
+      					value={editingDeadLine? editingDeadLine : ""} 
+      					onChange={(e) => setEditDeadline(e.target.value)}
+      					type="date"
+      					className="text-field"
+    />
                     </>
                   ) : (
                     <>
                       <p className="title">{note.title}</p>
                       <p className="desc">{note.description}</p>
+					  {note.deadline && <p className="deadline">Deadline: {note.deadline}</p>}
                     </>
                   )}
                 </div>
                 <div className="actions">
-                  {editingNoteId === note.id ? ( // اگر در حال ویرایش است، دکمه ذخیره نمایش داده می‌شود
+                  {editingNoteId === note.id ? (
                     <button onClick={handleUpdateNote}>✔️</button>
                   ) : (
                     <button onClick={() => handleEditClick(note)}>✏️</button>
@@ -187,6 +241,16 @@ const NoteApp: React.FC<NoteAppProps> = ({
                   month: "long",
                   day: "numeric",
                 })}
+			{note.deadline && (
+ 				 <p className={`deadline ${isDeadlinePassed(note.deadline) ? "deadline-passed" : ""}`}>
+   				 Deadline: {new Date(note.deadline).toLocaleDateString("en-US", {
+      			year: "numeric",
+      			month: "long",
+      			day: "numeric",
+    		})}
+ 		 </p>
+		)}
+
               </div>
             </div>
           ))}

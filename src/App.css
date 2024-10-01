@@ -102,6 +102,13 @@
   }
   
   .note-item__footer {
+	display: flex;
+	justify-content: space-between;
 	color: var(--text-300);
   }
+  .deadline-passed {
+	color: rgb(238, 103, 103);
+	/* text-decoration: line-through; اضافه کردن خط روی متن */
+  }
+  
   

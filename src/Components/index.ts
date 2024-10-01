@@ -1,7 +1,4 @@
-import NoteList from "./noteList";
-import NewNote from "./newNote";
 import Header from "./header";
-import NoteStatus from "./noteStatus";
-import Message from "./message";
+import Message from "./message/Message";
 import NoteApp from "./noteApp";
-export {NoteList,NewNote,Header,NoteStatus,Message,NoteApp}
+export {Header,Message,NoteApp}

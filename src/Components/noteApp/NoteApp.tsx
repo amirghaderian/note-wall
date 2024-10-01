@@ -46,6 +46,7 @@ const NoteApp: React.FC<NoteAppProps> = ({
 
     setTitle("");
     setDescription("");
+    setDeadline("")
     onAddNote(newNote);
     setEditingNoteId(null);
     setEditTitle("");

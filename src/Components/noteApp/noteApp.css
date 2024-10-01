@@ -1,0 +1,35 @@
+.text-field {
+	width: 100%; /* عرض کامل */
+	padding: 0.5rem; /* فاصله داخلی */
+	border: none !important; /* بدون حاشیه */
+	border-radius: 0.25rem; /* گوشه‌های گرد */
+	background-color: #f3f4f6; /* رنگ پس‌زمینه */
+	color: #1f2937; /* رنگ متن */
+	font-size: 1rem; /* اندازه متن */
+	transition: background-color 0.3s ease; /* انیمیشن تغییر رنگ */
+  }
+  
+  .text-field:focus {
+	outline: none !important; /* بدون حاشیه در زمان فوکوس */
+	background-color: #e5e7eb !important; /* رنگ پس‌زمینه در زمان فوکوس */
+  }
+  
+  .title, .desc, .deadline {
+	margin: 0.5rem 0; /* فاصله از ورودی‌ها */
+	color: #1f2937; /* رنگ متن */
+  }
+  .text-field {
+    appearance: none; /* غیرفعال کردن استایل پیش‌فرض مرورگر */
+    background-color: #f0f4ff; /* رنگ پس‌زمینه */
+    border: 2px solid #007bff; /* رنگ و ضخامت حاشیه */
+    border-radius: 8px; /* گوشه‌های گرد */
+    padding: 10px 15px; /* فاصله داخلی */
+    font-size: 16px; /* اندازه فونت */
+    transition: border-color 0.3s ease; /* انتقال نرم */
+}
+
+.text-field:focus {
+    outline: none; /* حذف حاشیه‌ی پیش‌فرض */
+    border-color: #0056b3; /* تغییر رنگ حاشیه هنگام فوکوس */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* سایه */
+}

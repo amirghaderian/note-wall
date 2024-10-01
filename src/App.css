@@ -33,7 +33,6 @@
   }
   
   .note-status {
-	display: flex;
 	justify-content: space-between;
 	color: var(--text-400);
 	margin-bottom: 2rem;
@@ -46,6 +45,10 @@
 	padding: 0.2rem 0.3rem;
 	font-size: 0.75rem;
 	color: var(--text-100);
+  }
+  .note-status ul{
+	display: flex;
+	justify-content: space-between;
   }
   
   .note-item {

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./App.css";
-import { NewNote, NoteList, Header, NoteStatus } from "./Components";
+import { NewNote, NoteList, Header, NoteStatus, NoteApp } from "./Components";
 import Note from "./types/types";
 
 const App: React.FC = () => {
@@ -10,7 +10,10 @@ const App: React.FC = () => {
   const handleNotes = (newNote: Note) => {
     setNotes((prevNotes) => [...prevNotes, newNote]);
   };
-
+const handleUpdate = (newNote: Note) => {
+  const filterNotes=notes.filter((note)=>note.id!==newNote.id)
+  setNotes(() => [...filterNotes, newNote]);
+};
   const handleDelete = (id: number) => {
     const filteredNotes = notes.filter((note) => note.id !== id);
     setNotes(filteredNotes);
@@ -32,7 +35,7 @@ const App: React.FC = () => {
   return (
     <div className="container">
       <Header notes={notes} sortBy={sortBy} onSort={handleChange} />
-      <div className="note-app">
+      {/* <div className="note-app">
         <NewNote onAddNote={handleNotes} />
         <div className="note-container">
           <NoteStatus notes={notes} />
@@ -44,7 +47,17 @@ const App: React.FC = () => {
             onComplete={handleCompletedNote}
           />
         </div>
-      </div>
+      </div> */}
+          <NoteApp
+        onAddNote={handleNotes}
+        onDelete={handleDelete}
+        onUpdate={handleUpdate}
+        onComplete={handleCompletedNote}
+        notes={notes}
+        sortBy={sortBy}
+        sortedNotes={sortedNotes}
+        // onSortChange={handleChange}
+      />
     </div>
   );
 };

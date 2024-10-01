@@ -1,35 +1,60 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from "react";
+import "./App.css";
+import { NewNote,NoteList,Header,NoteStatus } from "./Components";
 
-function App() {
-  const [count, setCount] = useState(0)
+// تعریف نوع برای یادداشت
+interface Note {
+  id: number; // یا string، بسته به اینکه ID به چه صورت تعریف شده
+  content: string;
+  completed: boolean;
+}
+
+const App: React.FC = () => {
+  const [notes, setNotes] = useState<Note[]>([]);
+  const [sortBy, setSortBy] = useState<string>("latest");
+
+  const handleNotes = (newNote: Note) => {
+    setNotes((prevNotes) => [...prevNotes, newNote]);
+  };
+
+  const handleDelete = (id: number) => {
+    const filteredNotes = notes.filter((note) => note.id !== id);
+    setNotes(filteredNotes);
+  };
+
+  const handleCompletedNote = (id: number) => {
+    const newNotes = notes.map((note) =>
+      note.id === id ? { ...note, completed: !note.completed } : note
+    );
+    setNotes(newNotes);
+  };
+
+  let sortedNotes = notes;
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSortBy(e.target.value);
+    setNotes(sortedNotes);
+  };
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <div className="container">
+        <Header notes={notes} sortBy={sortBy} onSort={handleChange} />
+        <div className="note-app">
+          <NewNote onAddNote={handleNotes} />
+          <div className="note-container">
+            <NoteStatus notes={notes} />
+            <NoteList
+              notes={sortedNotes}
+              sortBy={sortBy}
+              sortedNotes={sortedNotes}
+              onDelete={handleDelete}
+              onComplete={handleCompletedNote}
+            />
+          </div>
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
-  )
-}
+  );
+};
 
-export default App
+export default App;

@@ -1,0 +1,96 @@
+.datepicker-container {
+    width: 100%;
+    display: inline-block;
+  }
+  
+  .datepicker-header {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    border: 1px solid #ddd;
+    background: #f9f9f9;
+    cursor: pointer;
+  }
+  .datepicker{
+    width: 100%; /* عرض کامل */
+      padding: 0.2rem 0; /* فاصله داخلی */
+      border: none !important; /* بدون حاشیه */
+      border-radius: 0.25rem; /* گوشه‌های گرد */
+      background-color: #f3f4f6; /* رنگ پس‌زمینه */
+      color: #1f2937; /* رنگ متن */
+      font-size: 1rem; /* اندازه متن */
+      transition: background-color 0.3s ease; /* انیمیشن تغییر رنگ */
+  }
+  .datepicker-input {
+    flex: 1;
+    padding: 5px 10px;
+    border: none;
+    outline: none;
+    background: transparent;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .icon-alert-circle {
+    margin-left: 10px;
+    /* آیکون دلخواه خود را اضافه کنید */
+  }
+  
+  .datepicker-dropdown {
+    width: 100%;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+  }
+  
+  .datepicker-body {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .datepicker-select-container {
+    margin-bottom: 10px;
+  }
+  
+  .datepicker-select-label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+  }
+  
+  .datepicker-select {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .datepicker-days-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+  
+  .datepicker-day {
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    user-select: none;
+  }
+  
+  .datepicker-day:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .datepicker-day.selected {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+  }
+  

@@ -3,116 +3,116 @@
 	margin: 0 auto;
 	padding: 2rem;
 	text-align: center;
-  }
-  
-  .note-header {
+	height: calc(100vh - 32px);
+}
+
+.note-header {
 	display: flex;
 	align-items: center;
-	justify-content: space-between; /* تغییر برای فاصله بیشتر */
+	justify-content: space-between;
 	margin-bottom: 3rem;
 	border-bottom: 1px solid var(--text-400);
-	background-color: var(--bg-color); /* افزودن پس‌زمینه */
-  }
-  
-  .note-app {
+	background-color: var(--bg-color);
+}
+
+.note-app {
 	display: flex;
 	justify-content: space-between;
 	gap: 2rem;
-	background-color: var(--bg-color); /* افزودن پس‌زمینه */
-	border-radius: 0.5rem; /* گوشه‌های گرد */
-	padding: 2rem; /* فضای داخلی */
-	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* سایه */
-  }
-  
-  .note-form {
+	background-color: var(--bg-color);
+	border-radius: 0.5rem;
+	padding: 2rem;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.note-form {
 	gap: 1.5rem;
 	display: grid;
-  }
-  
-  .add-new-note {
+}
+
+.add-new-note {
 	width: 30%;
-  }
-  
-  .note-container {
+}
+
+.note-container {
 	width: 60%;
-  }
-  
-  .note-status {
+}
+
+.note-status {
 	justify-content: space-between;
 	color: var(--text-400);
 	margin-bottom: 2rem;
-  }
-  
-  .note-status span {
+}
+
+.note-status span {
 	border-radius: 2rem;
 	display: inline-block;
 	background-color: var(--text-400);
 	padding: 0.2rem 0.3rem;
 	font-size: 0.75rem;
 	color: var(--text-100);
-  }
-  
-  .note-status ul {
+}
+
+.note-status ul {
 	display: flex;
 	justify-content: space-between;
-  }
-  
-  .note-item {
+}
+
+.note-item {
 	padding: 1rem;
 	background-color: #fff;
 	border-radius: 0.75rem;
 	margin-bottom: 1.5rem;
-	box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1); /* سایه */
-	transition: transform 0.2s; /* انیمیشن */
-  }
-  
-  .note-item:hover {
-	transform: translateY(-2px); /* انیمیشن هنگام هاور */
-  }
-  
-  .note-item__header {
+	box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+	transition: transform 0.2s;
+}
+
+.note-item:hover {
+	transform: translateY(-2px);
+}
+
+.note-item__header {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	padding-bottom: 0.3rem;
 	margin-bottom: 0.3rem;
 	border-bottom: 1px solid var(--text-100);
-  }
-  
-  .note-item.completed .title {
+}
+
+.note-item.completed .title {
 	text-decoration: line-through;
-  }
-  
-  .note-item.completed {
+}
+
+.note-item.completed {
 	opacity: 80%;
-  }
-  
-  .note-item__header .title {
+}
+
+.note-item__header .title {
 	font-size: 1.1rem;
 	color: var(--text-700);
 	margin-bottom: 0.5rem;
 	font-weight: 700;
-  }
-  
-  .note-item__header .desc {
+}
+
+.note-item__header .desc {
 	color: var(--text-400);
 	margin-bottom: 0.5rem;
 	font-weight: 300;
-  }
-  
-  .note-item__header .actions {
+}
+
+.note-item__header .actions {
 	display: flex;
 	gap: 1.5rem;
 	align-items: center;
-  }
-  
-  .note-item__footer {
+}
+
+.note-item__footer {
 	display: flex;
 	justify-content: space-between;
 	color: var(--text-300);
-  }
-  
-  .deadline-passed {
+}
+
+.deadline-passed {
 	color: rgb(238, 103, 103);
-  }
-  
+}

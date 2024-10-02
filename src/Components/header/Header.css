@@ -3,9 +3,9 @@
 	justify-content: space-between;
 	align-items: center;
 	padding: 20px;
-	background-color: #f0f4f8; /* رنگ پس‌زمینه ملایم */
+	background-color: #f0f4f8;
 	border-radius: 8px;
-	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* سایه نرم */
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
   }
   
   .note-header h1 {
@@ -17,16 +17,16 @@
 	padding: 10px;
 	border: 1px solid #ccc;
 	border-radius: 5px;
-	background-color: #fff; /* پس‌زمینه سفید */
+	background-color: #fff;
 	transition: border-color 0.3s;
   }
   
   .note-sort-select:focus {
-	border-color: #007bff; /* رنگ مرز در حالت فوکوس */
-	outline: none; /* حذف حاشیه پیش‌فرض */
+	border-color: #007bff; 
+	outline: none; 
   }
   
   .note-sort-select option {
-	padding: 10px; /* فاصله داخلی گزینه‌ها */
+	padding: 10px; 
   }
   

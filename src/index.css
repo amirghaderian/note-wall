@@ -1,5 +1,3 @@
-/* index.css */
-
 :root {
 	--font-family: 'Inter', sans-serif;
 	--bg-color: #f3f4f6;
@@ -12,46 +10,47 @@
 	--primary-600: #4f46e5;
 	--primary-100: #e0e7ff;
 	--rose-500: #f43f5e;
-  }
+}
   
-  * {
+* {
 	padding: 0;
 	margin: 0;
 	box-sizing: border-box;
 	list-style: none;
-  }
+}
   
-  body {
+body {
 	background-color: var(--bg-color);
 	width: 100vw;
 	min-height: 100vh;
 	font-family: var(--font-family);
 	color: var(--text-700);
-  }
+	overflow-x:hidden
+}
   
-  button {
+button {
 	border: none;
 	outline: none;
 	cursor: pointer;
 	background: none;
-  }
+}
   
-  input {
+input {
 	display: block;
 	outline: none;
 	border: none;
-  }
+}
   
-  p {
+p {
 	text-align: left;
-  }
+}
   
-  h1, h2 {
+h1, h2 {
 	margin-bottom: 1.5rem;
 	color: var(--text-700);
-  }
+}
   
-  select {
+select {
 	padding: 0.5rem 1rem;
 	outline: none;
 	border: 1px solid var(--text-400);
@@ -60,19 +59,19 @@
 	color: var(--text-700);
 	background-color: var(--white);
 	transition: border-color 0.3s, box-shadow 0.3s;
-  }
+}
   
-  select:focus {
+select:focus {
 	border-color: var(--primary-600);
 	box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
-  }
+}
   
-  .btn {
+.btn {
 	border-radius: 0.5rem;
 	padding: 0.75rem 1rem;
-  }
+}
   
-  .btn--primary {
+.btn--primary {
 	background: linear-gradient(135deg, var(--primary-600) 0%, var(--primary-700) 100%);
 	color: white;
 	font-size: 1rem;
@@ -80,15 +79,15 @@
 	border-radius: 0.5rem;
 	transition: background 0.3s, transform 0.2s;
 	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
+}
   
-  .btn--primary:hover {
+.btn--primary:hover {
 	background: linear-gradient(135deg, var(--primary-700) 0%, var(--primary-600) 100%);
 	transform: translateY(-2px);
 	box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-  }
+}
   
-  .text-field {
+.text-field {
 	width: 100%;
 	padding: 0.75rem 1rem;
 	border: 1px solid var(--text-400);
@@ -96,59 +95,57 @@
 	color: var(--text-700);
 	font-size: 1rem;
 	transition: border-color 0.3s, box-shadow 0.3s;
-  }
+}
   
-  .text-field:focus {
+.text-field:focus {
 	border-color: var(--primary-600);
 	box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
-  }
+}
 
-  :root {
-	--bg-color: #f3f4f6; /* رنگ پس‌زمینه اصلی */
-	--card-bg: #ffffff; /* رنگ پس‌زمینه کارت‌ها */
-	--card-shadow: rgba(0, 0, 0, 0.1); /* سایه کارت‌ها */
-	--primary-color: #007bff; /* رنگ اصلی دکمه‌ها */
-  }
+:root {
+	--bg-color: #f3f4f6;
+	--card-bg: #ffffff;
+	--card-shadow: rgba(0, 0, 0, 0.1);
+	--primary-color: #007bff;
+}
   
-  body {
+body {
 	background: var(--bg-color);
 	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-	color: #333; /* رنگ متن */
-	margin: 0; /* حذف حاشیه پیش‌فرض */
-	padding: 0; /* حذف padding پیش‌فرض */
-  }
+	color: #333;
+	margin: 0;
+	padding: 0;
+}
   
-  .container {
+.container {
 	max-width: 1280px;
-	margin: 0 auto; /* مرکز کردن اپلیکیشن */
-	padding: 2rem;
+	margin: 0 auto;
 	background-color: var(--bg-color);
-	border-radius: 10px; /* گرد کردن گوشه‌ها */
-	box-shadow: 0 4px 20px var(--card-shadow); /* سایه برای کل کانتینر */
-  }
-  .note-item {
-	background-color: var(--card-bg); /* پس‌زمینه سفید برای کارت‌ها */
-	border-radius: 10px; /* گرد کردن گوشه‌های کارت */
+	border-radius: 10px;
+	box-shadow: 0 4px 20px var(--card-shadow);
+}
+
+.note-item {
+	background-color: var(--card-bg);
+	border-radius: 10px;
 	padding: 1rem;
 	margin-bottom: 1.5rem;
-	box-shadow: 0 2px 8px var(--card-shadow); /* سایه کارت‌ها */
-	transition: transform 0.2s; /* انیمیشن برای افکت hover */
-  }
+	box-shadow: 0 2px 8px var(--card-shadow);
+	transition: transform 0.2s;
+}
   
-  .note-item:hover {
-	transform: translateY(-5px); /* افکت hover */
-  }
+.note-item:hover {
+	transform: translateY(-5px);
+}
   
-  .btn--primary {
-	background-color: var(--primary-color); /* رنگ دکمه اصلی */
-	color: white; /* رنگ متن دکمه */
-	padding: 1rem 1.5rem; /* padding بیشتر برای دکمه */
-	border-radius: 5px; /* گرد کردن گوشه‌های دکمه */
-	transition: background-color 0.3s; /* انیمیشن برای تغییر رنگ */
-  }
+.btn--primary {
+	background-color: var(--primary-color);
+	color: white;
+	padding: 1rem 1.5rem;
+	border-radius: 5px;
+	transition: background-color 0.3s;
+}
   
-  .btn--primary:hover {
-	background-color: darken(var(--primary-color), 10%); /* تیرگی رنگ دکمه در حالت hover */
-  }
-  
-  
+.btn--primary:hover {
+	background-color: darken(var(--primary-color), 10%);
+}

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Note from "../../types/types";
+// import Datepicker from "../datepicker";
 
-// نوع تعریف پروپس‌ها برای NoteApp
 interface NoteAppProps {
   onAddNote: (note: Note) => void;
   onDelete: (id: number) => void;
@@ -21,15 +21,15 @@ const NoteApp: React.FC<NoteAppProps> = ({
   notes,
   sortBy,
 }) => {
-  const [title, setTitle] = useState<string>(""); // برای افزودن یادداشت
-  const [description, setDescription] = useState<string>(""); // برای افزودن یادداشت
-  const [editTitle, setEditTitle] = useState<string>(""); // برای ویرایش یادداشت
-  const [editDescription, setEditDescription] = useState<string>(""); // برای ویرایش یادداشت
-  const [deadline, setDeadline] = useState<string>(""); // اضافه کردن ددلاین
-  const [editingDeadLine, setEditDeadline] =  useState<string>(""); // برای مدیریت یادداشت در حال ویرایش
-  const [editingNoteId, setEditingNoteId] = useState<number | null>(null); // برای مدیریت یادداشت در حال ویرایش
+  const [title, setTitle] = useState<string>(""); 
+  const [description, setDescription] = useState<string>(""); 
+  const [editTitle, setEditTitle] = useState<string>(""); 
+  const [editDescription, setEditDescription] = useState<string>(""); 
+  const [deadline, setDeadline] = useState<string>(""); 
+  const [editingDeadLine, setEditDeadline] =  useState<string>(""); 
+  const [editingNoteId, setEditingNoteId] = useState<number | null>(null); 
 
-  const [draggingIndex, setDraggingIndex] = useState<number | null>(null); // ایندکس یادداشتی که در حال کشیدن است
+  const [draggingIndex, setDraggingIndex] = useState<number | null>(null); 
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -62,9 +62,7 @@ const NoteApp: React.FC<NoteAppProps> = ({
 
   const handleUpdateNote = () => {
 	if (!editTitle || !editDescription || editingNoteId === null) return;
-  
-	// پیدا کردن یادداشت مورد نظر برای حفظ وضعیت completed
-	const noteToUpdate = notes.find((note) => note.id === editingNoteId);
+  	const noteToUpdate = notes.find((note) => note.id === editingNoteId);
   
 	if (!noteToUpdate) return;
   
@@ -72,27 +70,23 @@ const NoteApp: React.FC<NoteAppProps> = ({
 	  title: editTitle,
 	  description: editDescription,
 	  id: editingNoteId,
-	  completed: noteToUpdate.completed, // حفظ وضعیت completed
-	  createdAt: noteToUpdate.createdAt,  // حفظ تاریخ ایجاد اصلی
-	  deadline: editingDeadLine || "",  // استفاده از editingDeadLine
+	  completed: noteToUpdate.completed,
+	  createdAt: noteToUpdate.createdAt,  
+	  deadline: editingDeadLine || "",  
 	};
   
 	onUpdate(updatedNote);
   
-	// پاک کردن مقادیر بعد از ویرایش
 	setEditTitle("");
 	setEditDescription("");
 	setEditDeadline("");
 	setEditingNoteId(null);
   };
   
-
-  // حساب وضعیت یادداشت‌ها
   const allNotes = notes.length;
   const completedNotes = notes.filter((n) => n.completed).length;
   const openNotes = allNotes - completedNotes;
 
-  // مرتب‌سازی یادداشت‌ها
   const sortedNotes = [...notes].sort((a, b) => {
     if (sortBy === "earliest") {
       return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
@@ -103,7 +97,6 @@ const NoteApp: React.FC<NoteAppProps> = ({
     }
   });
 
-  // جابجایی یادداشت
   const handleDragStart = (index: number) => {
     setDraggingIndex(index);
   };
@@ -114,12 +107,12 @@ const NoteApp: React.FC<NoteAppProps> = ({
     const reorderedNotes = [...sortedNotes];
     const noteToMove = reorderedNotes.splice(draggingIndex, 1)[0];
     reorderedNotes.splice(index, 0, noteToMove);
-    setDraggingIndex(index); // آپدیت ایندکس جابجایی
-    onSort(reorderedNotes); // بروز رسانی ترتیب
+    setDraggingIndex(index); 
+    onSort(reorderedNotes); 
   };
 
   const handleDragEnd = () => {
-    setDraggingIndex(null); // پایان جابجایی
+    setDraggingIndex(null);
   };
   const isDeadlinePassed = (deadline: string) => {
 	const deadlineDate = new Date(deadline);
@@ -150,15 +143,16 @@ const NoteApp: React.FC<NoteAppProps> = ({
 		    <input
    			value={deadline}
 			onChange={(e) => setDeadline(e.target.value)}
-			type="date" // نوع ورودی به "date" تغییر می‌کند تا تاریخ ددلاین انتخاب شود
+			type="date" 
     		className="text-field"
   />
+    {/* <Datepicker id="example-datepicker"  placeholder="Deadline" classList="datepicker"  /> */}
           <button type="submit" className="btn btn--primary">
             Add New Note
           </button>
         </form>
       </div>
-      <div className="note-container">
+      <div className={`note-container`} style={!allNotes ?{display:"flex",justifyContent:"center",alignItems:"center",fontSize:"25px"}:{}}>
         {/* بخش وضعیت یادداشت‌ها */}
         <div className="note-status">
           {allNotes ? (

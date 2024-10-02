@@ -1,12 +1,11 @@
 import React from "react";
 import Note from "../../types/types";
-import './Header.css'; // فرمت CSS را به اینجا اضافه کنید
+import './Header.css'; 
 
-// تعریف نوع پروپس‌ها
 interface NoteHeaderProps {
-  notes: Note[]; // استفاده از نوع Note
-  sortBy: string; // نوع sortBy
-  onSort: (e: React.ChangeEvent<HTMLSelectElement>) => void; // نوع تابع onSort
+  notes: Note[]; 
+  sortBy: string; 
+  onSort: (e: React.ChangeEvent<HTMLSelectElement>) => void; 
 }
 
 const NoteHeader: React.FC<NoteHeaderProps> = ({ notes, sortBy, onSort }) => {
